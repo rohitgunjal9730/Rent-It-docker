@@ -1,0 +1,52 @@
+# =========================
+# GLOBAL IGNORE
+# =========================
+
+# -------- .NET --------
+bin/
+obj/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# -------- Spring Boot / Java --------
+**/target/
+**/.metadata/
+**/.settings/
+**/.classpath
+**/.project
+
+# -------- Eclipse Workspace --------
+**/.plugins/
+
+# -------- Node / React --------
+**/node_modules/
+**/build/
+
+# -------- IDE --------
+.vscode/
+.idea/
+.vs/
+**/.vs/
+
+# -------- Logs --------
+*.log
+
+# -------- OS --------
+Thumbs.db
+.DS_Store
+
+
+# -------- Environment Files --------
+.env
+.env.*
+*.tmp
+*.temp
+*.cache
+dist/
+coverage/
+ehthumbs.db
+Desktop.ini

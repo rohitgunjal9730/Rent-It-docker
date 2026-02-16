@@ -1,0 +1,6 @@
+@RentIt_owner_services_HostAddress = http://localhost:5004
+
+GET {{RentIt_owner_services_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

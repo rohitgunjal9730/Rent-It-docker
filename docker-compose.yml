@@ -1,0 +1,73 @@
+services:
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rentit_db
+      MYSQL_USER: rentit
+      MYSQL_PASSWORD: rentit123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  discovery-server:
+    build: ./DiscoveryServer
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ./ApiGateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+
+  auth-service:
+    build: ./P20_RentIt
+    container_name: auth-service
+    ports:
+      - "9090:9090"
+    depends_on:
+      - mysql-db
+      - discovery-server
+
+  customer-service:
+    build: ./RentIt_customer_services
+    container_name: customer-service
+    ports:
+      - "9093:9093"
+    depends_on:
+      - mysql-db
+      - discovery-server
+
+  admin-service:
+    build: ./RentIt_admin_services
+    container_name: admin-service
+    ports:
+      - "9091:9091"
+    depends_on:
+      - mysql-db
+
+  owner-service:
+    build: ./RentIt_owner_services
+    container_name: owner-service
+    ports:
+      - "9092:9092"
+    depends_on:
+      - mysql-db
+
+  frontend:
+    build: ./rent-it-frontend
+    container_name: frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api-gateway
+
+volumes:
+  mysql_data:
